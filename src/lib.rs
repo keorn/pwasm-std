@@ -10,6 +10,7 @@ extern crate alloc;
 #[macro_reexport(vec)] extern crate collections;
 
 pub extern crate bigint;
+pub extern crate tiny_keccak;
 
 use core::{slice, ptr, mem};
 use core::ops::Shl;
@@ -26,6 +27,9 @@ pub mod logger;
 
 /// Safe wrapper around externalities invokes
 pub mod ext;
+
+/// Fixed-size structures
+pub mod hash;
 
 extern "C" fn abort() {
 }
