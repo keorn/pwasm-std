@@ -7,7 +7,9 @@
 
 extern crate wasm_alloc;
 extern crate alloc;
-#[macro_reexport(vec)] extern crate collections;
+#[macro_use]
+#[macro_reexport(vec, format)]
+extern crate collections;
 
 pub extern crate bigint;
 pub extern crate tiny_keccak;
@@ -31,6 +33,8 @@ pub mod ext;
 /// Fixed-size structures
 pub mod hash;
 
+mod hex;
+
 extern "C" fn abort() {
 }
 
@@ -40,6 +44,8 @@ pub fn panic_fmt(_fmt: core::fmt::Arguments, _file_line: &(&'static str, u32)) -
     abort();
     unreachable!();
 }
+
+#[lang = "eh_personality"] extern fn eh_personality() {}
 
 /// Safe wrapper for call context
 pub struct CallArgs {
